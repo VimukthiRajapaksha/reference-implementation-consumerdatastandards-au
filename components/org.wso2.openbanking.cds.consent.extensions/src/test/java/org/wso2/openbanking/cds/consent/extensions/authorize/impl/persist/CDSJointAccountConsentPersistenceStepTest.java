@@ -120,8 +120,8 @@ public class CDSJointAccountConsentPersistenceStepTest {
 
         verify(consentPersistDataMock).addMetadata(eq(CDSConsentExtensionConstants.
                 USER_ID_AGAINST_NON_PRIMARY_ACCOUNTS_MAP), usersWithMultipleJointAccountsCaptor.capture());
-        Map<String, List<String>> usersWithMultipleJointAccountsCaptorValue =
-                (Map<String, List<String>>) usersWithMultipleJointAccountsCaptor.getValue();
+        Map<String, Map<String, List<String>>> usersWithMultipleJointAccountsCaptorValue =
+                (Map<String, Map<String, List<String>>>) usersWithMultipleJointAccountsCaptor.getValue();
 
         assertTrue(jointAccountIdWithUsersCaptorValue.containsKey("joint-account-id"));
         assertTrue(jointAccountIdWithUsersCaptorValue.get("joint-account-id").
@@ -131,8 +131,8 @@ public class CDSJointAccountConsentPersistenceStepTest {
         assertTrue(usersWithMultipleJointAccountsCaptorValue.containsKey("john@wso2.com@carbon.super"));
         assertTrue(usersWithMultipleJointAccountsCaptorValue.containsKey("amy@wso2.com@carbon.super"));
         assertTrue(usersWithMultipleJointAccountsCaptorValue.get("john@wso2.com@carbon.super")
-                .contains("joint-account-id"));
+                .get(CDSConsentExtensionConstants.LINKED_MEMBER_AUTH_TYPE).contains("joint-account-id"));
         assertTrue(usersWithMultipleJointAccountsCaptorValue.get("amy@wso2.com@carbon.super")
-                .contains("joint-account-id"));
+                .get(CDSConsentExtensionConstants.LINKED_MEMBER_AUTH_TYPE).contains("joint-account-id"));
     }
 }
